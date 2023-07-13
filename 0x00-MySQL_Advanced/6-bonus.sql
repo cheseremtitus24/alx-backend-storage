@@ -7,9 +7,10 @@ DELIMITER $$
 CREATE PROCEDURE AddBonus (IN user_id INT(11), IN project_name VARCHAR(255), IN score INT)
        BEGIN
             DECLARE proj_id INT DEFAULT 0;
+            DECLARE users_id INT DEFAULT 0;
             IF user_id > 0 THEN
                 -- USER EXISTS:- capture their project_id next
-                SELECT id INTO proj_id FROM projects where name=project_name;
+                SELECT id INTO proj_id FROM projects WHERE name=project_name;
                 IF proj_id > 1 THEN
                     -- PROJECT NAME EXISTS
                     INSERT INTO corrections(user_id,project_id,score) VALUES(user_id,proj_id,score);
