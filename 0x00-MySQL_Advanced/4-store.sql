@@ -3,11 +3,10 @@
 -- it allows the items quantity in stock to go below 0.
 
 DELIMITER $$
-USE `holberton` $$
 CREATE 
     DEFINER=CURRENT_USER 
-    TRIGGER `holberton`.`orders_AINS` 
-        AFTER INSERT ON `holberton`.`orders`
+    TRIGGER `orders_AINS` 
+        AFTER INSERT ON `orders`
             FOR EACH ROW
 -- Edit trigger body code below this line. Do not edit lines above this one BEGIN 
 BEGIN
