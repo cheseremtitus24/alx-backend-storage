@@ -4,7 +4,7 @@
 -- user_id , project Id + correction score
 
 DELIMITER $$
-CREATE PROCEDURE AddBonus (IN user_id INT(11), IN project_name VARCHAR(255), IN score INT)
+CREATE PROCEDURE AddBonus (IN user_id INT, IN project_name VARCHAR(255), IN score INT)
        BEGIN
             DECLARE proj_id INT DEFAULT 0;
             DECLARE users_id INT DEFAULT 0;
