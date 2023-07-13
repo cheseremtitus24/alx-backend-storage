@@ -5,7 +5,7 @@
 DELIMITER $$
 USE `holberton` $$
 CREATE 
-    DEFINER=`root`@`127.0.0.1` 
+    DEFINER=CURRENT_USER 
     TRIGGER `holberton`.`orders_AINS` 
         AFTER INSERT ON `holberton`.`orders`
             FOR EACH ROW
