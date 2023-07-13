@@ -11,7 +11,7 @@ CREATE
 BEGIN
            IF NEW.email != OLD.email and OLD.valid_email = 1 THEN
                 SET NEW.valid_email=0; 
-            ENDIF;
+            END IF;
 
 END$$
 DELIMITER ;
