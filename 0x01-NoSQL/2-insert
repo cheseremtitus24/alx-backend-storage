@@ -1,0 +1,3 @@
+// A non existent db is not created unless a 
+// table/collection is inserted
+db.school.insert({"name": "Holberton school"})
