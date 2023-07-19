@@ -3,9 +3,25 @@
 This module models a Caching System that stores the runtime values stored data
 """
 import uuid
+from functools import wraps
 from typing import Union, Callable, Optional
 
 import redis
+
+
+def count_calls(method):
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        # Get the qualified name of the method.
+        method_name = method.__qualname__
+
+        # Increment the count for that key.
+        self._redis.incr(method_name)
+
+        # Return the value returned by the original method.
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -21,6 +37,7 @@ class Cache:
         # flush the instance
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         :param data: is saved as a value in the redis DB
