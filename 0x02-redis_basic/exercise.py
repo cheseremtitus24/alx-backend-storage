@@ -21,6 +21,16 @@ def count_calls(method: Callable) -> Callable:
     """
     @wraps(method)
     def wrapper(self, *args, **kwargs):
+        """
+        :param self:
+        :type self:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
+        """
         # Get the qualified name of the method.
         method_name = method.__qualname__
 
@@ -29,6 +39,39 @@ def count_calls(method: Callable) -> Callable:
 
         # Return the value returned by the original method.
         return method(self, *args, **kwargs)
+
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """
+    Stores the history of inputs and outputs for a particular function.
+    :param method:Store function
+    :type method:Callable
+    :return: the method's inputs
+    :rtype: Callable
+    """
+    method_name = method.__qualname__
+    inputs = method_name + ":inputs"
+    outputs = method_name + ":outputs"
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """
+
+        :param self:
+        :type self:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
+        """
+        self._redis.rpush(inputs, str(args))
+        output = method(self, *args, **kwargs)
+        self._redis.rpush(outputs, str(output))
+        return output
 
     return wrapper
 
@@ -46,6 +89,7 @@ class Cache:
         # flush the instance
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
