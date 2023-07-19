@@ -32,10 +32,3 @@ class Cache:
         rand_key_string: str = str(randkey)
         self._redis.set(name=rand_key_string, value=data)
         return rand_key_string
-
-    def __del__(self) -> None:
-        """
-        :return: None
-        :rtype: None
-        """
-        self._redis.close()
