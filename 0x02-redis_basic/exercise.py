@@ -12,12 +12,12 @@ class Cache:
     """
     Saves data to Redis DB
     """
-    _redis: redis.Redis = redis.Redis()
 
     def __init__(self):
         """
         Flushes/Deletes all the keys in the Redis DB
         """
+        self._redis: redis.Redis = redis.Redis ( )
         # flush the instance
         self._redis.flushdb()
 
