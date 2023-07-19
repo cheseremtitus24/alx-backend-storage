@@ -9,7 +9,16 @@ from typing import Union, Callable, Optional
 import redis
 
 
-def count_calls(method):
+def count_calls(method: Callable) -> Callable:
+    """
+    Decorator function that counts the number of times
+    that a method has been called and uses the .inc method of
+    redis
+    :param method: Method to be wrapped
+    :type method: Callable
+    :return: value returned by original method
+    :rtype: Callable
+    """
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         # Get the qualified name of the method.
