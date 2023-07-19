@@ -15,6 +15,9 @@ class Cache:
     _redis: redis.Redis = redis.Redis()
 
     def __init__(self):
+        """
+        Flushes/Deletes all the keys in the Redis DB
+        """
         # flush the instance
         self._redis.flushdb()
 
