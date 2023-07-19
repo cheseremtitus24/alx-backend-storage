@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-
+This module models a Caching System that stores the runtime values stored data
 """
 import uuid
 from typing import Union
@@ -17,7 +17,7 @@ class Cache:
         """
         Flushes/Deletes all the keys in the Redis DB
         """
-        self._redis: redis.Redis = redis.Redis ( )
+        self._redis: redis.Redis = redis.Redis()
         # flush the instance
         self._redis.flushdb()
 
