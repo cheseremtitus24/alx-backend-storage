@@ -1,4 +1,4 @@
 // use keyword creates
 // db if not exists else uses existing db
-use mydb
+use my_db
 db.dummy({"test":"mate"})
