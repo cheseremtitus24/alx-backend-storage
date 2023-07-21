@@ -1,5 +1,3 @@
  // Counts all the documents that are held
  // in the school Collection
  db.school.estimatedDocumentCount()
-
-
